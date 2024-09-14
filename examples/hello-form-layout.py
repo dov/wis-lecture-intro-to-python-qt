@@ -50,8 +50,11 @@ class MainWindow(QWidget):
         self.setLayout(layout)
         
         self.name_edit = QLineEdit()
+        self.name_edit.setPlaceholderText("Name")
         self.phone_edit = QLineEdit()
+        self.phone_edit.setPlaceholderText("+972-59999999")
         self.occupation_edit = QLineEdit()
+        self.occupation_edit.setPlaceholderText("Occupation")
         
         layout.addRow("Name:", self.name_edit)
         layout.addRow("Phone Number:", self.phone_edit)

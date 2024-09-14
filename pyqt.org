@@ -13,8 +13,8 @@
 In this lecture I will give brief background of different GUI libraries and paradigms in python. I will do a deep dive into PyQt and show lots of code examples. I will briefly mention the Qt GUI builder (and why I don't like it), scientific visualization, animation, and how to use an embedded web browser as a python frontend.
 
 * About myself
-  - Made Aliyah from Sweden in 1989
-  - M.Sc. in Physics from the Weizmann Institute 1991
+  - Made Aliyah 🇮🇱 from 🇸🇪 Sweden 🫎 in 1989
+  - M.Sc. 🧑‍🎓 in Physics from the Weizmann Institute 1991
   - Consultant for Prof. Hadassa Degani Since ~1992
   - Major work at companies in Software and algorithms development:
     - Orbotech - 16y 
@@ -60,11 +60,11 @@ In this lecture I will give brief background of different GUI libraries and para
   - Core is licensed LGPL, i.e. you can use it in commercial application (though it is tricky)
   - Additional parts are licensed GPL. You're source code must be free to use this.
   - Also allow commercial licensing
-  - Qt for python :snake:
+  - Qt for python versions :snake:
     - Two versions: 
       - PyQt - Commercial or GPL
       - Qt for Python (PySide5) - LGPL
-  - Current version is Qt6 (though I'm using Qt5 here)
+  - Current version is Qt6 (but I'm using Qt5 here)
 
 * Event driven programming
   - Qt belongs to "event driven programming" paradigm
@@ -75,6 +75,7 @@ In this lecture I will give brief background of different GUI libraries and para
 * PyQt hello world
  
  - Define widgets (controls) and enter main loop
+ - [[file:hello-pyqt.png][hello-pyqt.png]]
 
 [[file:examples/hello-pyqt.py][hello-pyqt.py]]
 
@@ -82,32 +83,45 @@ In this lecture I will give brief background of different GUI libraries and para
 
   - Layout management is inserted between the parent and the widgets
   - No need to place widgets by pixel position
+  [[file:hello-layout.png][hello-layout.png]]
   - [[file:examples/hello-layout.py][hello-layout.py]]
+
+* Layout management 2
   - Layouts types:
     - ~QVBoxLayout~ and ~QHBoxLayout~ - Linear vertical and horizontal
     - ~QGrid~ - 2D grid
     - ~QFormLayout~ - [[file:examples/hello-form-layout.py][hello-form-layout.py]]
 
 * Tabs
+
   - Tabs is another useful way of organizing the user interface
+  - [[file:hello-tabs.png][hello-tabs.png]]
   - [[file:examples/hello-tabs.py][hello-tabs.py]]    
 
 * Coloring the interface
 
   - Color the interface by using a stylesheet (like in the web)
   - Can color globally or for individual widgets (typically not recommended)
+  - [[file:hello-stylesheet.png][hello-stylesheet.png]]
   - [[file:examples/hello-stylesheet.py][hello-stylesheet.py]]
 
 * Reactive 
 
   - Reactions are set up by ~widget.signal_name.connect(callback_method)~
     - In Qt terminology you connect a /signal/ to a /slot/
+  - May use `lambda` for short functions
   - signal names are listed in the widget documentation
-  - E.g. for buttons:
-    - https://doc.qt.io/qt-6/qpushbutton.html
-    - Most common signal is ~clicked~
+  - E.g. ~clicked~ for ~QPushButton()~
 
+* Reactive example
+  - [[file:hello-name.png][hello-name.png]]
   - Example: [[file:examples/hello-name.py][hello-name.py]]
+
+* Emitting signals
+  - Qt classes can emit their own signals
+  - Useful for "decoupling"
+  - Example where two classes "ping" and "pong" don't know about one another
+  - Example: [[file:examples/hello-emit-signals.py][hello-emit-signals.py]]
 
 * Writing an "application"
 
@@ -115,6 +129,7 @@ In this lecture I will give brief background of different GUI libraries and para
      - A menu bar
      - A central widget
      - A status row   
+   - [[file:hello-mainwindow.png][hello-mainwindow.png]]
    - [[file:examples/hello-mainwindow.py][hello-mainwindow.py]]
 
 * Designer
@@ -126,6 +141,7 @@ In this lecture I will give brief background of different GUI libraries and para
   - Load and connect to it: [[file:examples/hello-ui.py][hello-ui.py]]
    
 * Why I don't like designers
+
   - (But your preferences may differ...)
      1. Prevents reuse and causes bad coding practices
       - It is easy to extend a widget by:
@@ -137,54 +153,75 @@ In this lecture I will give brief background of different GUI libraries and para
       - Invites cut and paste (bad way of programming!)
   - 2. Merging XML ui files in git is "hellish"  👹...
   - 3. Difficult to use 3rd party libraries, e.g. pyqtgraph
+  - However, you can combine the two approaches!
 
 * The graphics view
+
   - A widget canvas with items that may be moved, change color etc
   - [[file:examples/hello-graphicsview.py][hello-graphics-view.py]]
 
 * Let's try animation, move the car
+
   - [[file:examples/car-stuck.py][car-stuck.py]]
   - Doesn't work? Why?
 
 * The solution is to use a worker thread!
+
   - [[file:examples/car-worker-thread.py][car-worker-thread.py]]
   
+* Lists and model view
+
+  - List and table widgets support model/view 
+  - You change the data (with some magic glue, and the display changes)
+  - [[file:examples/hello-modelview.py][hello-modelview.py]]
+
 * Embed a browser in a widget
 
-- QtWebEngine widget
-- [[file:examples/hello-webengine.py][hello-webengine.py]]
-- But why? See next page...
+  - QtWebEngine widget
+  - [[file:examples/hello-webengine.py][hello-webengine.py]]
+  - But why? See next page...
 
 * Add a webserver to python!
+
   - Create a python thread
   - Serve webpages by flask
   - [[file:examples/hello-webengine-and-flask.py][hello-webengine-and-flask.py]]
-  - Can wite entire backend front end application this way!
+  - Can write entire backend front end application this way!
   - Supports advanced features like:
     - Unsolicited messages from the backend (web streams)
     - web sockets (two way communication between backend and front end)
+  - Allows "down the line", turning your program into a web service
   
 * pyqtgraph 
+
   - Scientific widgets
   - MIT license
   - [[file:examples/hello-xygraph.py][hello-xygraph.py]]
   
 * matplotlib
+
   - Need to install matplotlib python qt backend 
   - Embed matplotlib in python
   - [[file:examples/hello-qt-matplotlib.py][hello-qt-matplotlib.py]]
   - Updating graph (animation) example: https://www.pythonguis.com/tutorials/plotting-matplotlib/
+  - Apparenty buggy!
   
 * General notes
+
   - Separate GUI from functionality!
-  - I typically start with writing a command line interface for the functionality
-  - Only once it works builds GUI
-  - Deployment is difficult! 
-  - Easier with C++ (though I have little experience in deploying python...)
+  - My modus operandi:
+    1. Write functionality in a library
+    2. Write a command line interface
+    3. Write GUI
+  - Deployment of python programs is difficult! 
+  - (But if someone shares the computer, it may not be necessary)
+  - Deploying is easier with C++ (though I have little experience in deploying python...)
 
 * References
+
   - Qt home page: https://www .qt.io
   - Qt for python home page: https://doc.qt.io/qtforpython-5/
   - Flask (web framework) home page: https://flask.palletsprojects.com/en/3.0.x/
   - https://www.pyqtgraph.org/
-  - 
+  - Tutorials:
+    - https://www.pythonguis.com/pyqt5-tutorial/khttps://www.tutorialspoint.com/pyqt/index.htm
