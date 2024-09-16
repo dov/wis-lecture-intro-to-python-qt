@@ -13,8 +13,11 @@ class MyWidget(QWidget):
     def __init__(self):
         super().__init__()
 
-        # Create a layout and place two labels in it
-        layout = QVBoxLayout(self)
+        # Create a layout 
+        layout = QVBoxLayout()
+
+        # Attach it to self
+        self.setLayout(layout)
 
         # Crete widgets while adding them to the layout
         layout.addWidget(QLabel(self, text="Hello, World!")) # English

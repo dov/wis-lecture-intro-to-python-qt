@@ -21,25 +21,25 @@ class TabDemo(QWidget):
         # First tab
         tab1 = QWidget()
         tab1_layout = QVBoxLayout()
-        tab1_layout.addWidget(QLabel("Content of Tab 1"))
+        tab1_layout.addWidget(QLabel("Edamer"))
         tab1.setLayout(tab1_layout)
         
         # Second tab
         tab2 = QWidget()
         tab2_layout = QVBoxLayout()
-        tab2_layout.addWidget(QLabel("Content of Tab 2"))
+        tab2_layout.addWidget(QLabel("Gorgonzola"))
         tab2.setLayout(tab2_layout)
         
         # Third tab
         tab3 = QWidget()
         tab3_layout = QVBoxLayout()
-        tab3_layout.addWidget(QLabel("Content of Tab 3"))
+        tab3_layout.addWidget(QLabel("Brie"))
         tab3.setLayout(tab3_layout)
         
         # Add tabs to QTabWidget
-        self.tabs.addTab(tab1, "Tab 1")
-        self.tabs.addTab(tab2, "Tab 2")
-        self.tabs.addTab(tab3, "Tab 3")
+        self.tabs.addTab(tab1, "Cheese 1")
+        self.tabs.addTab(tab2, "Cheese 2")
+        self.tabs.addTab(tab3, "Cheese 3")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -1,7 +1,7 @@
 #+STARTUP: hidestars showall 
 #+OPTIONS: ^:nil toc:nil num:nil html-postamble:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://swteam:8080/~dov/dov-org.css" />
-#+COMMENT: Do (setenv "QT_SCALE_FACTOR" 2.0) for demo
+#+COMMENT: Do (setenv "QT_SCALE_FACTOR" "2.0") for demo
 #+COMMENT: (setq org-image-actual-width nil)
 
 #+AUTHOR: Dov Grobgeld
@@ -32,12 +32,12 @@ In this lecture I will give brief background of different GUI libraries and para
 * Example 1. Dr3TP
   - MRI cancer diagnostics
 #+ATTR_ORG: :width 800
-  [[file:images/dr3tp-screenshot.png][dr3tp-screenshot.png]]
+  file:images/dr3tp-screenshot.png
   
 * Example 2. FitExplorer
   - A tool for graphically matching fitting functions with data
 #+ATTR_ORG: :width 600
-  [[file:images/fitexplorer-screenshot.png][fitexplorer-screenshot.png]]
+  file:images/fitexplorer-screenshot.png
 
 * GUI's
 ** Linux (and crossplatform)
@@ -75,7 +75,6 @@ In this lecture I will give brief background of different GUI libraries and para
 * PyQt hello world
  
  - Define widgets (controls) and enter main loop
- - [[file:hello-pyqt.png][hello-pyqt.png]]
 
 [[file:examples/hello-pyqt.py][hello-pyqt.py]]
 
@@ -83,7 +82,6 @@ In this lecture I will give brief background of different GUI libraries and para
 
   - Layout management is inserted between the parent and the widgets
   - No need to place widgets by pixel position
-  [[file:hello-layout.png][hello-layout.png]]
   - [[file:examples/hello-layout.py][hello-layout.py]]
 
 * Layout management 2
@@ -95,32 +93,29 @@ In this lecture I will give brief background of different GUI libraries and para
 * Tabs
 
   - Tabs is another useful way of organizing the user interface
-  - [[file:hello-tabs.png][hello-tabs.png]]
   - [[file:examples/hello-tabs.py][hello-tabs.py]]    
 
 * Coloring the interface
 
   - Color the interface by using a stylesheet (like in the web)
   - Can color globally or for individual widgets (typically not recommended)
-  - [[file:hello-stylesheet.png][hello-stylesheet.png]]
   - [[file:examples/hello-stylesheet.py][hello-stylesheet.py]]
 
 * Reactive 
 
   - Reactions are set up by ~widget.signal_name.connect(callback_method)~
     - In Qt terminology you connect a /signal/ to a /slot/
-  - May use `lambda` for short functions
+  - May use ~lambda~ for short functions
   - signal names are listed in the widget documentation
   - E.g. ~clicked~ for ~QPushButton()~
-
-* Reactive example
-  - [[file:hello-name.png][hello-name.png]]
   - Example: [[file:examples/hello-name.py][hello-name.py]]
 
+
 * Emitting signals
-  - Qt classes can emit their own signals
-  - Useful for "decoupling"
-  - Example where two classes "ping" and "pong" don't know about one another
+
+  - Qt classes can emit custom signals
+  - Useful for decoupling and reuse
+  - Example where two classes ~Ping~ and ~Pong~ don't know about one another
   - Example: [[file:examples/hello-emit-signals.py][hello-emit-signals.py]]
 
 * Writing an "application"
@@ -129,7 +124,6 @@ In this lecture I will give brief background of different GUI libraries and para
      - A menu bar
      - A central widget
      - A status row   
-   - [[file:hello-mainwindow.png][hello-mainwindow.png]]
    - [[file:examples/hello-mainwindow.py][hello-mainwindow.py]]
 
 * Designer
@@ -149,7 +143,7 @@ In this lecture I will give brief background of different GUI libraries and para
   class MyTemp(QtWidget):
     :
   #+end_src
-      - But it is difficult (impossible) to do the same in a designer. 
+      - But it is difficult (impossible?) to do the same in a designer. 
       - Invites cut and paste (bad way of programming!)
   - 2. Merging XML ui files in git is "hellish"  👹...
   - 3. Difficult to use 3rd party libraries, e.g. pyqtgraph
@@ -169,10 +163,11 @@ In this lecture I will give brief background of different GUI libraries and para
 
   - [[file:examples/car-worker-thread.py][car-worker-thread.py]]
   
-* Lists and model view
+* Lists and model view (*)
 
   - List and table widgets support model/view 
   - You change the data (with some magic glue, and the display changes)
+  - Update data and "emit" a signal
   - [[file:examples/hello-modelview.py][hello-modelview.py]]
 
 * Embed a browser in a widget
@@ -216,7 +211,7 @@ In this lecture I will give brief background of different GUI libraries and para
   - Deployment of python programs is difficult! 
   - (But if someone shares the computer, it may not be necessary)
   - Deploying is easier with C++ (though I have little experience in deploying python...)
-
+  - Github Copilot is scary good for PyQt!
 * References
 
   - Qt home page: https://www .qt.io

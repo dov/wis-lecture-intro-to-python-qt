@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushBut
 # Fixed, or read from a resource file
 myStyle = '''
 QLabel { background-color : pink; color : black; }
-#lupchi { background-color : lime; color : black; }
+#cheddar { background-color : rgb(255,222,173); color : black; }
 '''
 
 class MyWidget(QWidget):
@@ -27,7 +27,7 @@ class MyWidget(QWidget):
         layout.addWidget(QLabel(self, text="Hello, World!")) # English
         layout.addWidget(QLabel(self, text="שלום עולם!‏"))     # Internationalization (i18n) support
         # Add a button of class lupchi
-        layout.addWidget(QPushButton(self, text="I'm Lupchi!", objectName="lupchi"))
+        layout.addWidget(QPushButton(self, text="Press me!", objectName="cheddar"))
 
         # Set preferred size
         self.resize(320, 240)

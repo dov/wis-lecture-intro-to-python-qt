@@ -35,6 +35,26 @@ class TrafficLightWidget(QWidget):
         self.blue_on = not state
         self.update()
 
+# Define the Pong class
+class Pong(QObject):
+    pong_signal = pyqtSignal()
+
+    def your_turn(self):
+        QTimer.singleShot(1000, self.emit_pong)
+
+    def emit_pong(self):
+        self.pong_signal.emit()
+
+# Define the Ping class
+class Ping(QObject):
+    ping_signal = pyqtSignal()
+
+    def your_turn(self):
+        QTimer.singleShot(1000, self.emit_ping)
+
+    def emit_ping(self):
+        self.ping_signal.emit()
+
 # Define the Arena class
 class Arena(QWidget):
     def __init__(self):
@@ -79,26 +99,6 @@ class Arena(QWidget):
         self.label.setText('Received ping')
         self.traffic_light.set_blue_on(True)
         self.pong.your_turn()
-
-# Define the Pong class
-class Pong(QObject):
-    pong_signal = pyqtSignal()
-
-    def your_turn(self):
-        QTimer.singleShot(1000, self.emit_pong)
-
-    def emit_pong(self):
-        self.pong_signal.emit()
-
-# Define the Ping class
-class Ping(QObject):
-    ping_signal = pyqtSignal()
-
-    def your_turn(self):
-        QTimer.singleShot(1000, self.emit_ping)
-
-    def emit_ping(self):
-        self.ping_signal.emit()
 
 # Main function to run the application
 if __name__ == '__main__':
