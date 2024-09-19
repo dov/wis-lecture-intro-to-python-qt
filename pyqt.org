@@ -140,7 +140,7 @@ In this lecture I will give brief background of different GUI libraries and para
      1. Prevents reuse and causes bad coding practices
       - It is easy to extend a widget by:
   #+begin_src python
-  class MyTemp(QtWidget):
+  class MyTemp(QWidget):
     :
   #+end_src
       - But it is difficult (impossible?) to do the same in a designer. 
@@ -178,14 +178,12 @@ In this lecture I will give brief background of different GUI libraries and para
 
 * Add a webserver to python!
 
-  - Create a python thread
-  - Serve webpages by flask
-  - [[file:examples/hello-webengine-and-flask.py][hello-webengine-and-flask.py]]
-  - Can write entire backend front end application this way!
-  - Supports advanced features like:
-    - Unsolicited messages from the backend (web streams)
-    - web sockets (two way communication between backend and front end)
+  - Create a python thread for web server
+  - Serve webpages by flask (or any other python web server)
   - Allows "down the line", turning your program into a web service
+  - Lots of scientific web visualization
+  - Whether web interface or qt interface, it's a matter of choice and taste
+  - [[file:examples/hello-webengine-and-flask.py][hello-webengine-and-flask.py]]
   
 * pyqtgraph 
 

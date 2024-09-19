@@ -1,3 +1,13 @@
+#!/usr/bin/python
+
+######################################################################
+#  Two classes that emit signals, and a parent that tie them
+#  together.
+#
+#  2024-09-16 Mon
+#  Dov Grobgeld <dov.grobgeld@gmail.com>
+######################################################################
+
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton
 from PyQt5.QtCore import pyqtSignal, QObject, QTimer
@@ -11,7 +21,7 @@ class TrafficLightWidget(QWidget):
         self.red_on = False
         self.setFixedSize(100, 50)
 
-    def paintEvent(self, event):
+    def paintEvent(self, event):  # override QWidget.paintEvent
         painter = QPainter(self)
         if self.blue_on:
             painter.setBrush(QColor('blue'))
@@ -50,7 +60,7 @@ class Ping(QObject):
     ping_signal = pyqtSignal()
 
     def your_turn(self):
-        QTimer.singleShot(1000, self.emit_ping)
+        QTimer.singleShot(700, self.emit_ping)
 
     def emit_ping(self):
         self.ping_signal.emit()
@@ -61,12 +71,15 @@ class Arena(QWidget):
         super().__init__()
         self.initUI()
         
+        # Create classes
         self.pong = Pong()
         self.ping = Ping()
         
+        # Setup signal handlers
         self.pong.pong_signal.connect(self.handle_pong)
         self.ping.ping_signal.connect(self.handle_ping)
         
+        # Let's get rolling!
         self.ping.ping_signal.emit()
 
     def initUI(self):
