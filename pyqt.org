@@ -1,6 +1,6 @@
 #+STARTUP: hidestars showall 
 #+OPTIONS: ^:nil toc:nil num:nil html-postamble:nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://swteam:8080/~dov/dov-org.css" />
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="dov-org.css" />
 #+COMMENT: Do (setenv "QT_SCALE_FACTOR" "2.0") for demo
 #+COMMENT: (setq org-image-actual-width nil)
 

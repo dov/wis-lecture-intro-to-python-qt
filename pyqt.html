@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2024-09-19 Thu 23:33 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>pyqt presentation</title>
+<meta name="author" content="Dov Grobgeld" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="dov-org.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">pyqt presentation</h1>
+
+<div id="outline-container-org5071be5" class="outline-2">
+<h2 id="org5071be5">Abstract</h2>
+<div class="outline-text-2" id="text-org5071be5">
+<p>
+In this lecture I will give brief background of different GUI libraries and paradigms in python. I will do a deep dive into PyQt and show lots of code examples. I will briefly mention the Qt GUI builder (and why I don't like it), scientific visualization, animation, and how to use an embedded web browser as a python frontend.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgad321da" class="outline-2">
+<h2 id="orgad321da">About myself</h2>
+<div class="outline-text-2" id="text-orgad321da">
+<ul class="org-ul">
+<li>Made Aliyah 🇮🇱 from 🇸🇪 Sweden 🫎 in 1989</li>
+<li>M.Sc. 🧑‍🎓 in Physics from the Weizmann Institute 1991</li>
+<li>Consultant for Prof. Hadassa Degani Since ~1992</li>
+<li>Major work at companies in Software and algorithms development:
+<ul class="org-ul">
+<li>Orbotech - 16y</li>
+<li>XJet - 13y</li>
+</ul></li>
+<li>Major computer language tools:
+<ul class="org-ul">
+<li>C/C++</li>
+<li>Python :snake:</li>
+<li>In the past (perl 🐪, tcl/tk, matlab, java :coffee:, and more)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6ac6449" class="outline-2">
+<h2 id="org6ac6449">My main WIS applications</h2>
+<div class="outline-text-2" id="text-org6ac6449">
+<ul class="org-ul">
+<li>Dr3TP</li>
+<li>DrDTI</li>
+<li>FitExplorer</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga68996c" class="outline-2">
+<h2 id="orga68996c">Example 1. Dr3TP</h2>
+<div class="outline-text-2" id="text-orga68996c">
+<ul class="org-ul">
+<li>MRI cancer diagnostics</li>
+</ul>
+
+<div id="org233b5fc" class="figure">
+<p><img src="images/dr3tp-screenshot.png" alt="dr3tp-screenshot.png">
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcfa087b" class="outline-2">
+<h2 id="orgcfa087b">Example 2. FitExplorer</h2>
+<div class="outline-text-2" id="text-orgcfa087b">
+<ul class="org-ul">
+<li>A tool for graphically matching fitting functions with data</li>
+</ul>
+
+<div id="orga72a078" class="figure">
+<p><img src="images/fitexplorer-screenshot.png" alt="fitexplorer-screenshot.png">
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org52c2952" class="outline-2">
+<h2 id="org52c2952">GUI's</h2>
+<div class="outline-text-2" id="text-org52c2952">
+</div>
+<div id="outline-container-org6a7545c" class="outline-3">
+<h3 id="org6a7545c">Linux (and crossplatform)</h3>
+<div class="outline-text-3" id="text-org6a7545c">
+<ul class="org-ul">
+<li>Gtk</li>
+<li>Qt</li>
+<li>WxWidgets</li>
+<li>Web</li>
+<li>Mobile</li>
+<li>And lots of others</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf22a042" class="outline-3">
+<h3 id="orgf22a042">Python</h3>
+<div class="outline-text-3" id="text-orgf22a042">
+<ul class="org-ul">
+<li>TkInter - (please don't use!) :poo:</li>
+<li>PyQt :-)</li>
+<li>PyGtk</li>
+<li>Kivy</li>
+<li>Lot's of others</li>
+<li>pyimgui - Immediate mode gui</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd2d3f7d" class="outline-2">
+<h2 id="orgd2d3f7d">A few words about Qt</h2>
+<div class="outline-text-2" id="text-orgd2d3f7d">
+<ul class="org-ul">
+<li>Written in C++</li>
+<li>Core is licensed LGPL, i.e. you can use it in commercial application (though it is tricky)</li>
+<li>Additional parts are licensed GPL. You're source code must be free to use this.</li>
+<li>Also allow commercial licensing</li>
+<li>Qt for python versions :snake:
+<ul class="org-ul">
+<li>Two versions: 
+<ul class="org-ul">
+<li>PyQt - Commercial or GPL</li>
+<li>Qt for Python (PySide5) - LGPL</li>
+</ul></li>
+</ul></li>
+<li>Current version is Qt6 (but I'm using Qt5 here)</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb6261ad" class="outline-2">
+<h2 id="orgb6261ad">Event driven programming</h2>
+<div class="outline-text-2" id="text-orgb6261ad">
+<ul class="org-ul">
+<li>Qt belongs to "event driven programming" paradigm
+<ul class="org-ul">
+<li>1. Define interface</li>
+<li>2. Connects events with callbacks (that may create more user interface)</li>
+</ul></li>
+<li>Enter main loop</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org387bf30" class="outline-2">
+<h2 id="org387bf30">PyQt hello world</h2>
+<div class="outline-text-2" id="text-org387bf30">
+<ul class="org-ul">
+<li>Define widgets (controls) and enter main loop</li>
+</ul>
+
+<p>
+<a href="examples/hello-pyqt.py">hello-pyqt.py</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9ed08c8" class="outline-2">
+<h2 id="org9ed08c8">Layout management</h2>
+<div class="outline-text-2" id="text-org9ed08c8">
+<ul class="org-ul">
+<li>Layout management is inserted between the parent and the widgets</li>
+<li>No need to place widgets by pixel position</li>
+<li><a href="examples/hello-layout.py">hello-layout.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org098a21b" class="outline-2">
+<h2 id="org098a21b">Layout management 2</h2>
+<div class="outline-text-2" id="text-org098a21b">
+<ul class="org-ul">
+<li>Layouts types:
+<ul class="org-ul">
+<li><code>QVBoxLayout</code> and <code>QHBoxLayout</code> - Linear vertical and horizontal</li>
+<li><code>QGrid</code> - 2D grid</li>
+<li><code>QFormLayout</code> - <a href="examples/hello-form-layout.py">hello-form-layout.py</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgaf4f051" class="outline-2">
+<h2 id="orgaf4f051">Tabs</h2>
+<div class="outline-text-2" id="text-orgaf4f051">
+<ul class="org-ul">
+<li>Tabs is another useful way of organizing the user interface</li>
+<li><a href="examples/hello-tabs.py">hello-tabs.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org17a3b70" class="outline-2">
+<h2 id="org17a3b70">Coloring the interface</h2>
+<div class="outline-text-2" id="text-org17a3b70">
+<ul class="org-ul">
+<li>Color the interface by using a stylesheet (like in the web)</li>
+<li>Can color globally or for individual widgets (typically not recommended)</li>
+<li><a href="examples/hello-stylesheet.py">hello-stylesheet.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org59e4d2e" class="outline-2">
+<h2 id="org59e4d2e">Reactive</h2>
+<div class="outline-text-2" id="text-org59e4d2e">
+<ul class="org-ul">
+<li>Reactions are set up by <code>widget.signal_name.connect(callback_method)</code>
+<ul class="org-ul">
+<li>In Qt terminology you connect a <i>signal</i> to a <i>slot</i></li>
+</ul></li>
+<li>May use <code>lambda</code> for short functions</li>
+<li>signal names are listed in the widget documentation</li>
+<li>E.g. <code>clicked</code> for <code>QPushButton()</code></li>
+<li>Example: <a href="examples/hello-name.py">hello-name.py</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org166e674" class="outline-2">
+<h2 id="org166e674">Emitting signals</h2>
+<div class="outline-text-2" id="text-org166e674">
+<ul class="org-ul">
+<li>Qt classes can emit custom signals</li>
+<li>Useful for decoupling and reuse</li>
+<li>Example where two classes <code>Ping</code> and <code>Pong</code> don't know about one another</li>
+<li>Example: <a href="examples/hello-emit-signals.py">hello-emit-signals.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcdfa605" class="outline-2">
+<h2 id="orgcdfa605">Writing an "application"</h2>
+<div class="outline-text-2" id="text-orgcdfa605">
+<ul class="org-ul">
+<li>An application has:
+<ul class="org-ul">
+<li>A menu bar</li>
+<li>A central widget</li>
+<li>A status row</li>
+</ul></li>
+<li><a href="examples/hello-mainwindow.py">hello-mainwindow.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgcbd6024" class="outline-2">
+<h2 id="orgcbd6024">Designer</h2>
+<div class="outline-text-2" id="text-orgcbd6024">
+<ul class="org-ul">
+<li>You can also "draw" the application through a GUI editor</li>
+<li>Also a great way to inspect/find widgets</li>
+<li>Exec: designer-qt5</li>
+<li><a href="examples/mainwin.ui">mainwin.ui</a></li>
+<li>Load and connect to it: <a href="examples/hello-ui.py">hello-ui.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga6ead7c" class="outline-2">
+<h2 id="orga6ead7c">Why I don't like designers</h2>
+<div class="outline-text-2" id="text-orga6ead7c">
+<ul class="org-ul">
+<li>(But your preferences may differ&#x2026;)
+<ol class="org-ol">
+<li>Prevents reuse and causes bad coding practices
+<ul class="org-ul">
+<li>It is easy to extend a widget by:</li>
+</ul></li>
+</ol></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #a020f0;">class</span> <span style="color: #228b22;">MyTemp</span>(QWidget):
+  :
+</pre>
+</div>
+<ul class="org-ul">
+<li>But it is difficult (impossible?) to do the same in a designer.</li>
+<li>Invites cut and paste (bad way of programming!)</li>
+</ul>
+<ul class="org-ul">
+<li>2. Merging XML ui files in git is "hellish"  👹&#x2026;</li>
+<li>3. Difficult to use 3rd party libraries, e.g. pyqtgraph</li>
+<li>However, you can combine the two approaches!</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org55af2c3" class="outline-2">
+<h2 id="org55af2c3">The graphics view</h2>
+<div class="outline-text-2" id="text-org55af2c3">
+<ul class="org-ul">
+<li>A widget canvas with items that may be moved, change color etc</li>
+<li><a href="examples/hello-graphicsview.py">hello-graphics-view.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge88ecb2" class="outline-2">
+<h2 id="orge88ecb2">Let's try animation, move the car</h2>
+<div class="outline-text-2" id="text-orge88ecb2">
+<ul class="org-ul">
+<li><a href="examples/car-stuck.py">car-stuck.py</a></li>
+<li>Doesn't work? Why?</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org44ea3e7" class="outline-2">
+<h2 id="org44ea3e7">The solution is to use a worker thread!</h2>
+<div class="outline-text-2" id="text-org44ea3e7">
+<ul class="org-ul">
+<li><a href="examples/car-worker-thread.py">car-worker-thread.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org14e0eec" class="outline-2">
+<h2 id="org14e0eec">Lists and model view (*)</h2>
+<div class="outline-text-2" id="text-org14e0eec">
+<ul class="org-ul">
+<li>List and table widgets support model/view</li>
+<li>You change the data (with some magic glue, and the display changes)</li>
+<li>Update data and "emit" a signal</li>
+<li><a href="examples/hello-modelview.py">hello-modelview.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1b87679" class="outline-2">
+<h2 id="org1b87679">Embed a browser in a widget</h2>
+<div class="outline-text-2" id="text-org1b87679">
+<ul class="org-ul">
+<li>QtWebEngine widget</li>
+<li><a href="examples/hello-webengine.py">hello-webengine.py</a></li>
+<li>But why? See next page&#x2026;</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org37ba579" class="outline-2">
+<h2 id="org37ba579">Add a webserver to python!</h2>
+<div class="outline-text-2" id="text-org37ba579">
+<ul class="org-ul">
+<li>Create a python thread for web server</li>
+<li>Serve webpages by flask (or any other python web server)</li>
+<li>Allows "down the line", turning your program into a web service</li>
+<li>Lots of scientific web visualization</li>
+<li>Whether web interface or qt interface, it's a matter of choice and taste</li>
+<li><a href="examples/hello-webengine-and-flask.py">hello-webengine-and-flask.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0461373" class="outline-2">
+<h2 id="org0461373">pyqtgraph</h2>
+<div class="outline-text-2" id="text-org0461373">
+<ul class="org-ul">
+<li>Scientific widgets</li>
+<li>MIT license</li>
+<li><a href="examples/hello-xygraph.py">hello-xygraph.py</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgebc11d3" class="outline-2">
+<h2 id="orgebc11d3">matplotlib</h2>
+<div class="outline-text-2" id="text-orgebc11d3">
+<ul class="org-ul">
+<li>Need to install matplotlib python qt backend</li>
+<li>Embed matplotlib in python</li>
+<li><a href="examples/hello-qt-matplotlib.py">hello-qt-matplotlib.py</a></li>
+<li>Updating graph (animation) example: <a href="https://www.pythonguis.com/tutorials/plotting-matplotlib/">https://www.pythonguis.com/tutorials/plotting-matplotlib/</a></li>
+<li>Apparenty buggy!</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9fc7125" class="outline-2">
+<h2 id="org9fc7125">General notes</h2>
+<div class="outline-text-2" id="text-org9fc7125">
+<ul class="org-ul">
+<li>Separate GUI from functionality!</li>
+<li>My modus operandi:
+<ol class="org-ol">
+<li>Write functionality in a library</li>
+<li>Write a command line interface</li>
+<li>Write GUI</li>
+</ol></li>
+<li>Deployment of python programs is difficult!</li>
+<li>(But if someone shares the computer, it may not be necessary)</li>
+<li>Deploying is easier with C++ (though I have little experience in deploying python&#x2026;)</li>
+<li>Github Copilot is scary good for PyQt!</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgff3f503" class="outline-2">
+<h2 id="orgff3f503">References</h2>
+<div class="outline-text-2" id="text-orgff3f503">
+<ul class="org-ul">
+<li>Qt home page: <a href="https://www">https://www</a> .qt.io</li>
+<li>Qt for python home page: <a href="https://doc.qt.io/qtforpython-5/">https://doc.qt.io/qtforpython-5/</a></li>
+<li>Flask (web framework) home page: <a href="https://flask.palletsprojects.com/en/3.0.x/">https://flask.palletsprojects.com/en/3.0.x/</a></li>
+<li><a href="https://www.pyqtgraph.org/">https://www.pyqtgraph.org/</a></li>
+<li>Tutorials:
+<ul class="org-ul">
+<li><a href="https://www.pythonguis.com/pyqt5-tutorial/khttps://www.tutorialspoint.com/pyqt/index.htm">https://www.pythonguis.com/pyqt5-tutorial/khttps://www.tutorialspoint.com/pyqt/index.htm</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
